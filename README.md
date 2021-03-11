@@ -38,7 +38,7 @@ provider "aws" {
 }
 
 module "az_colocate" {
-  source = "git@github.com:ClusterDaemon/terraform-aws-privatelink-az-colocation.git?ref=v3.0"
+  source = "git@github.com:ClusterDaemon/terraform-aws-privatelink-az-colocation.git?ref=v1.0"
 
   vpc_endpoint_service_names = [ "com.amazonaws.vpce.us-east-1.vpce-svc-05b1514b390f69ca0", ]
 }
