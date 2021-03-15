@@ -1,4 +1,3 @@
-## v1.0.0
+## v0.1.0
 
-* Updated documentation
-* Passed full integration test
+Initial release.
