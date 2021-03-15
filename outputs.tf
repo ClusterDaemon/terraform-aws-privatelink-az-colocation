@@ -10,7 +10,7 @@ output "vpc_endpoint_service_availability_zones" {
 
 output "vpc_endpoint_service_attributes" {
   description = "Map of VPC endpoint service data objects, keyed by endpoint service name."
-  value = {
+  value = var.vpc_endpoint_service_names != ["_"] ? {
     for endpoint in data.aws_vpc_endpoint_service.this : endpoint.service_name => endpoint
-  }
+  } : {}
 }

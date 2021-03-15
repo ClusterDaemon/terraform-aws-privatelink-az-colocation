@@ -8,7 +8,7 @@ terraform {
 }
 
 data "aws_vpc_endpoint_service" "this" {
-  count = length(var.vpc_endpoint_service_names)
+  count = var.vpc_endpoint_service_names != ["_"] ? length(var.vpc_endpoint_service_names) : 0
 
   service_name = var.vpc_endpoint_service_names[count.index]
 }
@@ -20,15 +20,15 @@ data "aws_availability_zones" "available" {
 locals {
 
   # Use input AZ list if exists. Otherwise, obtain from data source.
-  availability_zones = tolist(var.availability_zones) == tolist([ "_", ]) ? data.aws_availability_zones.available.names : var.availability_zones
+  availability_zones = tolist(var.availability_zones) == ["_"] ? data.aws_availability_zones.available.names : var.availability_zones
 
-  endpoint_service_availability_zones = distinct(
+  endpoint_service_availability_zones = var.vpc_endpoint_service_names != ["_"] ? distinct(
     concat(
       [
         for service in data.aws_vpc_endpoint_service.this : service.availability_zones
       ]
     )...
-  )
+  ) : local.availability_zones
 
   # Produce availability zone list to first include AZs that overlap with desired VPC endpoint services.
   # Select requested amount of AZs from that re-arranged list, guaranteeing VPC endpoint connectivity.

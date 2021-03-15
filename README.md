@@ -60,7 +60,7 @@ AWS | >= 2.41
 
 | Name | Description | Type | Default | Required |
 | --- | --- | --- | --- | --- |
-| vpc\_endpoint\_service\_names | List of VPC interface endpoint services which will be queried for AZs used. These AZs will appear as the earliest output elements of the "availability\_zones" output variable. | list(string) | nil | yes |
+| vpc\_endpoint\_service\_names | List of VPC interface endpoint services which will be queried for AZs used. These AZs will appear as the earliest output elements of the "availability\_zones" output variable. | list(string) | ["_"] | no |
 | az\_count\_max | Maximum amount of avilability zones to produce in output AZ list. This amount or the total amount of available fault domains will be produced, whichever is lower. Defaults to an impossibly high number. | number | 100 | no |
 | az\_count\_min | Minimum amount of availability zones to produce in output AZ list. | number | 0 | no |
 | availability\_zones | List of availability zones to choose from. Calculated if not provided. | list(string) | nil | no |
